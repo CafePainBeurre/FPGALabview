@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <Project Type="Project" LVVersion="19008000">
-	<Property Name="varPersistentID:{1AF5F5E4-F144-4DAE-8C14-64E972097AB4}" Type="Ref">/RT myRIO Target/LEDCommand_NP.lvlib/SensorValue_NP</Property>
-	<Property Name="varPersistentID:{54AB9D58-28B7-48E4-B1A3-B17338354751}" Type="Ref">/RT myRIO Target/LEDCommand_NP.lvlib/LEDState_SP</Property>
+	<Property Name="varPersistentID:{84A07530-5BC0-4300-B4C5-2E9841E2C925}" Type="Ref">/RT myRIO Target/LEDCommand_NP.lvlib/SensorValue_NP</Property>
+	<Property Name="varPersistentID:{A9282F81-6D75-4DA1-9760-85F0DA072B9A}" Type="Ref">/RT myRIO Target/LEDCommand_NP.lvlib/LEDState_SP</Property>
 	<Property Name="varPersistentID:{C0918F0B-C70F-4166-9D1F-EBB61403E672}" Type="Ref">/RT myRIO Target/LEDCommand_NP.lvlib/LEDCommand_NP</Property>
 	<Item Name="My Computer" Type="My Computer">
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
@@ -19,7 +19,7 @@
 	</Item>
 	<Item Name="RT myRIO Target" Type="RT myRIO">
 		<Property Name="alias.name" Type="Str">RT myRIO Target</Property>
-		<Property Name="alias.value" Type="Str">0.0.0.0</Property>
+		<Property Name="alias.value" Type="Str">172.22.11.2</Property>
 		<Property Name="CCSymbols" Type="Str">TARGET_TYPE,RT;OS,Linux;CPU,ARM;DeviceCode,762F;</Property>
 		<Property Name="crio.ControllerPID" Type="Str">762F</Property>
 		<Property Name="host.ResponsivenessCheckEnabled" Type="Bool">true</Property>
@@ -57,6 +57,34 @@
 		<Property Name="target.server.vi.access" Type="Str">+*</Property>
 		<Property Name="target.server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="target.server.vi.propertiesEnabled" Type="Bool">true</Property>
+		<Property Name="target.WebServer.Config" Type="Str">Listen 8000
+
+NI.ServerName default
+DocumentRoot "$LVSERVER_DOCROOT"
+TypesConfig "$LVSERVER_CONFIGROOT/mime.types"
+DirectoryIndex index.htm
+WorkerLimit 10
+InactivityTimeout 60
+
+LoadModulePath "$LVSERVER_MODULEPATHS"
+LoadModule LVAuth lvauthmodule
+LoadModule LVRFP lvrfpmodule
+
+#
+# Pipeline Definition
+#
+
+SetConnector netConnector
+
+AddHandler LVAuth
+AddHandler LVRFP
+
+AddHandler fileHandler ""
+
+AddOutputFilter chunkFilter
+
+
+</Property>
 		<Property Name="target.WebServer.Enabled" Type="Bool">false</Property>
 		<Property Name="target.WebServer.LogEnabled" Type="Bool">false</Property>
 		<Property Name="target.WebServer.LogPath" Type="Path">/c/ni-rt/system/www/www.log</Property>
